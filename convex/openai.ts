@@ -5,8 +5,9 @@ import OpenAI from "openai";
 import { SpeechCreateParams } from "openai/resources/audio/speech.mjs";
 
 const openai = new OpenAI({
-  apiKey: "lol api",
-})
+  apiKey: process.env.OPENAI_API_KEY || 'your_hardcoded_api_key_for_testing',
+});
+
 
 export const generateAudioAction = action({
   args: { input: v.string(), voice: v.string() },
@@ -18,7 +19,8 @@ export const generateAudioAction = action({
     });
 
     const buffer = await mp3.arrayBuffer();
-    
+    console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
+
     return buffer;
   },
 });

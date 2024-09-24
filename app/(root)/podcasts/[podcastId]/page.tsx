@@ -42,8 +42,16 @@ const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'po
       <PodcastDetailPlayer 
         isOwner={isOwner}
         podcastId={podcast._id}
-        {...podcast}
+        podcastTitle={podcast.podcastTitle}
+        audioUrl={podcast.audioUrl || ''} 
+        imageUrl={podcast.imageUrl || ''}
+        author={podcast.author}
+        imageStorageId={podcast.imageStorageId!} 
+        audioStorageId={podcast.audioStorageId!} 
+        authorImageUrl={podcast.authorImageUrl}
+        authorId={podcast.authorId}
       />
+
 
       <p className="text-white-2 text-16 pb-8 pt-[45px] font-medium max-md:text-center">{podcast?.podcastDescription}</p>
 
@@ -65,7 +73,7 @@ const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'po
             {similarPodcasts?.map(({ _id, podcastTitle, podcastDescription, imageUrl }) => (
               <PodcastCard 
                 key={_id}
-                imgUrl={imageUrl}
+                imgUrl={imageUrl || "url"}
                 title={podcastTitle}
                 description={podcastDescription}
                 podcastId={_id}
